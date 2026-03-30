@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+
+{% block conteudo %}
+<h2>Excluir jogo</h2>
+
+<h3>Você está excluindo o jogo {{ jogo.nome }}</h3>
+<img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e09fb4a0-f849-43d0-bcb2-79f4b40e67c6/djwc0be-1d2d9e95-930f-4cb2-a4bc-bfab6dadf338.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9lMDlmYjRhMC1mODQ5LTQzZDAtYmNiMi03OWY0YjQwZTY3YzYvZGp3YzBiZS0xZDJkOWU5NS05MzBmLTRjYjItYTRiYy1iZmFiNmRhZGYzMzguanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.9eh0-szYjZxDMCGvKmHiJbdVAAGxInIkGD69lmzmTPg" alt="" width="450">
+<br>
+Você tem certeza que deseja fazer isso? Está operação não pode ser desfeita.
+<br>
+<div>
+    <form action="jogos_excluir.php" method="post">
+        <input type="hidden" name="id" value="{{ jogo.id }}">
+        <input type="submit" value=" ❌Apagar para sempre❌" style="background-color: red;">
+    </form>
+
+    <a href="jogos.php" style="background-color: green;">⬅️ Me arrependo!</a>
+</div>
+
+{% endblock %}
