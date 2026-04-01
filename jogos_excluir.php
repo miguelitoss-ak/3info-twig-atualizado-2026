@@ -20,7 +20,6 @@ if (!$id) {
     die;
 }
 
-
 $dados = $pdo->prepare('SELECT * FROM jogos WHERE id = :id');
 $dados->execute(['id' => $id]);
 

@@ -1,0 +1,30 @@
+{% extends "_base.html" %}
+
+{% block conteudo %}
+<h2>Editar jogo</h2>
+
+<h3>Você está editando o jogo {{ jogo.nome }}</h3>
+
+<div>
+    <h4>Editar:</h4>
+    <form action="jogos_editar.php" method="post" enctype="multipart/form-data">
+        Nome: <input type="text" name="nome" placeholder="Nome">
+        <br><br>
+        Estilo: <select name="estilo">
+            <option value="acao">Ação</option>
+            <option value="tiro">Tiro</option>
+            <option value="rpg">RPG</option>
+        </select>
+        <br><br>
+        Capa: <input type="file" name="capa">
+        <br><br>
+        <input type="hidden" name="id" value="{{ jogo.id }}">
+        <input type="submit" value="✍️Editar✍️" style="background-color: rgb(51, 255, 0);">  
+        <br><br>
+    </form>
+
+
+    <a href="jogos.php" style="background-color: rgb(174, 0, 255); color: white;">⬅️ Me arrependo!</a>
+</div>
+
+{% endblock %}
