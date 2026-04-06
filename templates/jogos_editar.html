@@ -8,7 +8,10 @@
 <div>
     <h4>Editar:</h4>
     <form action="jogos_editar.php" method="post" enctype="multipart/form-data">
-        Nome: <input type="text" name="nome" placeholder="Nome">
+
+        <input type="hidden" name="id" value="{{jogo.id}}">
+
+        Nome: <input type="text" name="nome" placeholder="Nome" value="{{jogo.nome}}">
         <br><br>
         Estilo: <select name="estilo">
             <option value="acao">Ação</option>
