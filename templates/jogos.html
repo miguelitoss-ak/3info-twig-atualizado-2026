@@ -1,6 +1,49 @@
 {% extends "_base.html" %}
 
 {% block conteudo %}
+<style>
+    /* Estilização da Tabela */
+    .tabela-jogos {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: sans-serif;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .tabela-jogos th {
+        background-color: #333;
+        color: white;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .tabela-jogos td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        vertical-align: middle;
+    }
+
+    /* Efeito zebrado nas linhas */
+    .tabela-jogos tr:nth-child(even) { background-color: #f2f2f2; }
+    .tabela-jogos tr:hover { background-color: #e9e9e9; }
+
+    /* Ajuste da Imagem */
+    .tabela-jogos img {
+        width: 100px;
+        border-radius: 4px;
+        display: block;
+    }
+
+    /* Links e Botões */
+    .link-novo {
+        text-decoration: none;
+        color: #28a745;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+    
+    .acao-link { text-decoration: none; font-size: 1.2em; }
+</style>
 
 {% set estilos = {
     'acao': 'Ação',
@@ -10,27 +53,42 @@
 
 <h3>Lista de jogos</h3>
 
-<a href="jogos_inserir.php">➕ Novo Jogo</a>
+<a href="jogos_inserir.php" class="link-novo">➕ Novo Jogo</a>
 <br><br>
-<table border="1" style="border-collapse: collapse;border-color: aquamarine;">
-    <tr>
-        <th>Nome</th>
-        <th>Estilo</th>
-        <th>Capa</th>
-        <th>Lançamento</th>
-        <th>Editar</th>
-        <th>Excluir</th>
-    </tr>
-    {% for jogo in jogos %}
-    <tr>
-        <td>{{ jogo.nome }}</td>
-        <td>{{ estilos[jogo.estilo] ?? "Não encontrado" }}</td>
-        <td><img src="img/{{ jogo.capa }}" width="150"></td>
-        <td>{{ jogo.lancamento}}</td>
-        <td><a href="jogos_editar.php?id={{ jogo.id }}">✍️</a></td>
-        <td><a href="jogos_excluir.php?id={{ jogo.id }}">🗑️</a></td>
-    </tr>
-    {% endfor %}
+
+<table class="tabela-jogos">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Estilo</th>
+            <th>Capa</th>
+            <th>Lançamento</th>
+            <th>Editar</th>
+            <th>Excluir</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for jogo in jogos %}
+        <tr>
+            <td><strong>{{ jogo.nome }}</strong></td>
+            <td>{{ estilos[jogo.estilo] ?? "Não encontrado" }}</td>
+            <td>
+                {% if jogo.capa %}
+                    <img src="img/{{ jogo.capa }}" alt="Capa de {{ jogo.nome }}">
+                {% else %}
+                    <span>Sem capa</span>
+                {% endif %}
+            </td>
+            <td>{{ jogo.lancamento|date("d/m/Y") }}</td> {# Formatei a data para o padrão BR #}
+            <td style="text-align: center;">
+                <a href="jogos_editar.php?id={{ jogo.id }}" class="acao-link">✍️</a>
+            </td>
+            <td style="text-align: center;">
+                <a href="jogos_excluir.php?id={{ jogo.id }}" class="acao-link" onclick="return confirm('Excluir este jogo?')">🗑️</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 
 {% endblock %}
