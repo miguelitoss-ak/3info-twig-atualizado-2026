@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = (int) $_POST["id"] ?? false;
     $nome = $_POST['nome'] ?? false;
     $estilo = $_POST['estilo'] ?? false;
+    $lancamento = $_POST['lancamento'] ?? false;
 
 
     if (!$_FILES['capa']['error']) {
@@ -28,12 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $capa = uniqid() . '.' . $ext;
         move_uploaded_file($_FILES['capa']['tmp_name'], "img/{$capa}");
     }
-    $sql = 'UPDATE jogos SET nome = :nome , estilo = :estilo' . (isset($capa) ? ', capa = :capa' : '') . ' WHERE id = :id';
+    $sql = 'UPDATE jogos SET nome = :nome , estilo = :estilo , lancamento = :lancamento' . (isset($capa) ? ', capa = :capa' : '') . ' WHERE id = :id';
     $dados = $pdo->prepare($sql);
     $params = [
         ':id' => $id,
         ':nome' => $nome,
         ':estilo' => $estilo,
+        ':lancamento' => $lancamento
     ];
     if (isset($capa)) {
         $params[':capa'] = $capa;
